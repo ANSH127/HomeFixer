@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% block title %}JustDial-Home{% endblock title %}
+{% block css %}
+
+<style>
+    
+    #btn {
+        font-size: large;
+        border-radius: 15px;
+        background-color: #fe0000;
+    }
+
+    #btn:hover {
+        background-color: white;
+        color: #fe0000;
+    }
+
+    body {
+        background: url('media/pexels-andrea-piacquadio-845451.jpg') no-repeat center center/cover;
+        height: 100%;
+        width: 100vw;
+        opacity: .8;
+        top: 0;
+        left: 0;
+        
+
+    }
+    
+
+    input {
+        color: red !important;
+        font-size: 20px !important;
+        font-weight: bold !important;
+        text-transform: uppercase !important;
+    }
+
+    .mybtn:hover {
+        background-color: white;
+    }
+
+
+
+    input:invalid {
+        border: 1px solid red;
+    }
+
+    .card {
+        width: 365px;
+    }
+
+    @media only screen and (max-width: 1170px) {
+        .card {
+            width: auto;
+
+        }
+
+        footer {
+            position: absolute;
+        }
+    }
+</style>
+{% endblock css %}
+
+{% block body %}
+
+
+<div>
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" id="bg">
+
+
+
+        <!-- Jumbotron -->
+
+        <div class="row gx-lg-5 align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <h1 class="my-5 display-3 fw-bold ls-tight" style="color: black;">
+                    JustDial <br />
+                    <span class="text-primary">Here
+                    </span>
+                </h1>
+
+            </div>
+
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="card">
+                    <div class="card-body py-5 px-md-5" style="background-color: #073952; opacity: .85; color: white;">
+
+                        <!-- 2 column grid layout with text inputs for the first and last names -->
+                        <form action="/" method="post" id="myform">{% csrf_token %}
+                            <div class="row">
+                                <div id='show'></div>
+                                <div class="form-outline">
+                                    <label class="form-label" for="city">City</label>
+                                    <input type="text" id="city" name="city" pattern="^(PALIA|BHIRA)$"
+                                        list="selectcity" class="form-control" required autocomplete="false" />
+                                    <datalist id="selectcity">
+                                        <option value="PALIA">PALIA</option>
+                                        <option value="BHIRA">BHIRA</option>
+
+
+                                    </datalist>
+
+                                </div>
+
+                                <div class="form-outline my-4">
+                                    <label class="form-label" for="service">Service</label>
+                                    <br>
+                                    <select name="service" class="select form-control-lg w-100" id="service">
+                                        <option value="Carpenter">Carpenter</option>
+                                        <option value="Electrician">Electrician</option>
+                                        <option value="Painter">Painter</option>
+                                        <option value="Plumber">Plumber</option>
+                                        <option value="Welder">Welder</option>
+                                    </select>
+
+
+                                </div>
+
+                                <div class="text-center">
+                                    <button id="btn" type="submit" onclick="change()" class="btn btn-danger">Search
+                                        Now</button>
+                                </div>
+
+
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Jumbotron -->
+
+
+    </div>
+
+    <div class="text-center text-dark mt-3" style=" color: white !important; ">
+
+
+
+        <span> © 2023 Copyright:
+            <a class="text-dark" href="https://FlyHigh.com/" style="color:red !important">JustDialHere.com</a></span>
+
+        <!-- Instagram -->
+        <a class="btn btn-link btn-floating btn-lg text-dark" href="https://www.instagram.com/i_agarwal_ansh/"
+            role="button" data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+
+        <!-- Linkedin -->
+        <a class="btn btn-link btn-floating btn-lg text-dark" href="https://www.linkedin.com/in/ansh-agarwal-390797253/"
+            role="button" data-mdb-ripple-color="dark" style="margin: -15px !important;"><i
+                class="fab fa-linkedin"></i></a>
+        <!-- Github -->
+        <a class="btn btn-link btn-floating btn-lg text-dark" href="https://github.com/the-error4-0-4" role="button"
+            data-mdb-ripple-color="dark"><i class="fab fa-github"></i></a>
+
+    </div>
+    <!-- Copyright -->
+
+</div>
+{% endblock body %}
+
+{% block js %}
+<script>
+    function change() {
+        x = document.getElementById('city').value
+        y=document.getElementById('service').value
+        
+        document.getElementById("myform").action = "/" + x + "/"+y+"/";
+
+
+    }
+</script>
+
+{% endblock js %}

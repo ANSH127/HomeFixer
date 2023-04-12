@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block title %}Mybookings-JustDialHere{% endblock title %}
+
+{% block css %}
+
+<style>
+    body {
+        background-color: aliceblue;
+    }
+
+    @media only screen and (max-width: 1170px) {
+
+        h5 {
+            font-size: 9px;
+        }
+
+        p {
+            font-size: 8px;
+        }
+
+        .btn {
+            font-size: 10px;
+        }
+
+    }
+</style>
+
+{% endblock css %}
+{% block body %}
+
+<div class="container mt-5">
+    <h2 style="font-family:sans-serif;"><span id="typed"></span></h2>
+    {% for item in obj %}
+    <div class="card my-2">
+        <div class="card-body" style="background-color: black; color: aqua; font-weight: bold;">
+
+            <div class="row">
+                <div class="col-3 ">
+                    {% if item.status == 'True'%}
+                    <h5><span class="badge text-bg-success">CONFIRMED</span></h5>
+                    {% elif item.status == 'False' %}
+                    <h5><span class="badge text-bg-danger">FAILED</span></h5>
+
+                    {% else %}
+                    <h5><span class="badge text-bg-warning">PENDING</span></h5>
+
+
+                    {% endif %}
+                    <p>Booked On: {{item.bookingdate}} </p>
+
+                </div>
+
+                <div class="col-3">
+                    <p> {{item.servicer.name}} ({{item.servicer.service}})</p>
+                </div>
+                <div class="col">
+                    <p> Booking refrence no</p>
+                    <p>{{item.sno}}</p>
+                </div>
+                <div class="col-3 ">
+
+                    <p>Schadule On: {{item.date}} </p>
+                    <p>Time: {{item.f_time}}-{{item.a_time}}</p>
+
+                </div>
+                <div class="col">
+
+                    <button onclick=" func();" class="btn btn-outline-info btn-lg my-1"
+                            type="submit">Cancel</button>
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+
+
+
+{% endblock body %}
+
+{% block js %}
+<script>
+    function func() {
+        let x = confirm("Are you sure you want to Cancel your booking?")
+        if (x) {
+            alert("Contact Admin..");
+            
+        }
+    }
+    var typed = new Typed('#typed', {
+        strings: ["Your Booking's"],
+        backSpeed: 15,
+        smartBackspace: true,
+        backDelay: 2200,
+        startDelay: 1000,
+        typeSpeed: 15,
+        loop: false,
+        showCursor: true,
+
+    });
+    
+</script>
+{% endblock js %}

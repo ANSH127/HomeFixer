@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% block title%} About-JustDialHere {% endblock %}
+
+{% block css %}
+<style>
+.card:hover{
+    background-color: aqua;
+    transition: all .2s ease-in-out .2s;
+
+
+}
+i{
+    font-size: 30px !important;
+    
+}
+
+body{
+    background: url('/media/pexels-artem-podrez-7233372.jpg') no-repeat center center/cover;
+
+        /* height: 100vh;
+        width: 100vw; */
+        opacity: .8;
+        top: 0;
+        left: 0;
+
+    }
+
+    a:hover{
+        color: red !important;
+    }
+    
+</style>
+
+{% endblock css %}
+
+
+{% block body %}
+<div class="container mt-4" style="margin-top: 50px !important; ">
+    <h1 class="text-center my-4" style="color: #0d0d0d;"><b> <span id="typed"></span></b></h1>
+
+    <div class="row" style="margin: auto;">
+        <div class="card-group my-2 mx-2" style="width: 348px; height: 280px;">
+            <div class="card">
+
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <div class="text-center my-4"> <i class="fas fa-home"></i> </div>
+                        <p class="text-center ">
+                            Trust
+
+
+                        </p>
+                    </h5>
+                    <p class="card-text">
+                      your trusted source for high-quality  services. We are a team of experienced professionals dedicated to providing top-notch service to our clients
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-group my-2 mx-2" style="width: 348px; height: 280px;">
+            <div class="card">
+
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <div class="text-center my-4"> <i class="far fa-times-circle"></i> </div>
+                        <p class="text-center "> No Brokers</p>
+                    </h5>
+                    <p class="card-text">
+                    <em>JustDialHere</em> is broker-free.We don't have any middleman operating for us.You check out the listing and book it online
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-group my-2 mx-2" style="width: 348px; height: 280px;">
+            <div class="card">
+
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <div class="text-center my-4"> <i class="fas fa-lock"></i> </div>
+                        <p class="text-center "> Secure Payments</p>
+                    </h5>
+                    <p class="card-text">
+                    No hassels of payment anymore.We promise you a 100% safe and secure network through
+                    our JustDialHere Website
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted" >
+    
+    <!-- Section: Social media -->
+  
+    <!-- Section: Links  -->
+    <section >
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3" style="padding-top: 20px;">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class=" fw-bold mb-4">
+              <i class="fas fa-gem me-3"></i>JustDialHere
+            </h6>
+            <p>
+                JustDialHere is a platform where you can find any service like plumber, electrician, carpenter, painter, etc. in your city. We are providing this service in Palia, Bhira, and other cities of Uttar Pradesh. 
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Our Services
+            </h6>
+            <p>
+              <a href="/PALIA/Carpenter/" class="text-reset">Palia</a>
+            </p>
+            <p>
+              <a href="/BHIRA/Carpenter/" class="text-reset">Bhira</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">SampuraNagar</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Others</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Useful links
+            </h6>
+            <p>
+              <a href="/" class="text-reset">Home</a>
+            </p>
+            <p>
+              <a href="/about/" class="text-reset">About Us</a>
+            </p>
+            <p>
+              <a href="/booking/" class="text-reset">Booking's</a>
+            </p>
+            <p>
+              <a href="/terms-of-service/" class="text-reset">Terms Of Service</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+
+            <p>
+              <i class="fas fa-envelope me-3"></i>
+             <a href="mailto:JustDialHere@support.com" style="color: grey !important;"> JustDialHere@support.com</a>
+            </p>
+            <p><i class="fas fa-phone me-3"></i><a href="tel:7905658520" style="color: grey !important;"> +91 7905658520</a></p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05); color: black;">
+      © 2023 Copyright:
+      <a class="text-reset fw-bold" style="color: red !important;" href="https://mdbootstrap.com/">JustDialHere.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+
+
+{% endblock body %}
+
+
+{% block js %}
+<script>
+    
+    var typed = new Typed('#typed', {
+        strings: ['Why JustDialHere?'],
+        backSpeed: 15,
+        smartBackspace: true,
+        backDelay: 2200,
+        startDelay: 1000,
+        typeSpeed: 25,
+        loop: false,
+        showCursor: true,
+
+    });
+
+    
+</script>
+
+{% endblock js %}

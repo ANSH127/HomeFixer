@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block title%} Contact-JustDialHere {% endblock %}
+{% block css %}
+<style>
+    input {
+        background-color: black !important;
+        font-size: 18px !important;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        border-radius: 30px;
+        line-height: 3;
+        width: 50%;
+        color: white;
+        padding: 5px 40px;
+
+
+    }
+
+    textarea {
+
+        background-color: black !important;
+        /* font-size: 18px !important; */
+        font-family: monospace;
+        border-radius: 30px;
+        width: 50%;
+        color: white;
+        padding: 0px 40px;
+        padding-top: 20px;
+
+
+    }
+
+    #btn {
+        font-size: 18px;
+        border-radius: 20px;
+        background-color: #827ffe;
+        padding: 20px 20px;
+
+    }
+
+    #btn:hover {
+        padding: 20px 40px;
+        transition: ease-in;
+        background-color: #403866;
+        transition: all .5s ease-in-out .5s;
+    }
+
+
+
+    @media screen and (max-width: 850px) {
+
+        input,
+        textarea {
+            width: 100%;
+        }
+
+
+    }
+
+    body {
+        background: url('/media/contact.jpg') no-repeat center center/cover;
+        /* height: 100vh; */
+        /* width: 100vw;  */
+        opacity: .8;
+        top: 0;
+        left: 0;
+
+    }
+
+    
+</style>
+
+
+
+{% endblock css %}
+
+
+{% block body %}
+
+<div class="container my-5">
+    <h3 class="text-center" style="color: #403866; font-family: fangsong; font-weight: bold;"><span id="typed"></span>
+    </h3>
+    <form action="/contact/" method="post">{% csrf_token %}
+        <div class="text-center my-4">
+
+            <input type="text" name="name" id="name" class="my-2" placeholder="Full Name">
+            <input type="text" name="email" id="email" class="my-2" placeholder="E-mail">
+            <input type="text" name="phone" id="phone" class="my-2" placeholder="Phone">
+            <textarea name="msg" id="msg" cols="30" rows="10" placeholder="Your Message"></textarea>
+            <div>
+                <button type="submit" class="btn btn-primary" id="btn"><i class="far fa-paper-plane"></i> Send</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+{% endblock body %}
+
+
+{% block js %}
+
+<script>
+
+    var typed = new Typed('#typed', {
+        strings: ["SEND US A MESSAGE"],
+        backSpeed: 15,
+        smartBackspace: true,
+        backDelay: 2200,
+        startDelay: 1000,
+        typeSpeed: 15,
+        loop: false,
+        showCursor: true,
+
+    });
+</script>
+
+{% endblock js %}

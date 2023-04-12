@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<style>
+
+    body {
+        background-color: aliceblue;
+    }
+
+</style>
+
+{% endblock css %}
+
+{% block body %}
+
+<section class="gradient-custom my-3">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                        <h1 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center" style="font-family: inherit;">Contact & Other Details </h1>
+                        <form action="/{{obj.city}}/{{obj.service}}/{{obj.sno}}/checkout"  method="post" onsubmit="return confirmsubmisson();">{% csrf_token %}
+                            
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-4 pb-2">
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="name" name="name" class="form-control form-control-lg"  required/>
+                                        <label class="form-label" for="name">Your Name</label>
+                                    </div>
+                                    
+                                
+
+                                </div>
+                                <div class="col-md-6 mb-4 pb-2">
+                                    <div class="form-outline form-white mb-4 w-100">
+                                        <input type="tel" id="phone" name="phone"
+                                            class="form-control form-control-lg" required />
+                                        <label class="form-label" for="phone">Your Phone No.</label>
+                                    </div>
+
+                                    
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4 d-flex align-items-center">
+                                    
+                                    <div class="form-outline form-white mb-4 w-100">
+                                        <input type="text" id="address" name="address"
+                                            class="form-control form-control-lg " required />
+                                        <label class="form-label" for="address">Your Address</label>
+                                    </div>
+                                    
+
+
+                                </div>
+                                <div class="col-md-6 mb-4 d-flex align-items-center">
+
+                                    <div class="form-outline form-white mb-4 w-100">
+                                        <input type="date" id="date" name="date"
+                                            class="form-control form-control-lg " required />
+                                        <label class="form-label" for="date">Schedule Date</label>
+                                    </div>
+
+                                    
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4 d-flex align-items-center">
+                                    <div class="form-outline form-white mb-4 w-100">
+                                        <input type="time" id="f_time" name="f_time"
+                                            class="form-control form-control-lg " required />
+                                        <label class="form-label" for="f_time">Schedule Time (From)</label>
+                                    </div>
+
+
+
+                                </div>
+
+                                <div class="col-md-6 mb-4 d-flex align-items-center">
+                                    <div class="form-outline form-white mb-4 w-100">
+                                        <input type="time" id="t_time" name="t_time"
+                                            class="form-control form-control-lg " required />
+                                        <label class="form-label" for="t_time">Schedule Time (To)</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-outline form-white mb-4 w-100">
+                                    <textarea class="form-control" id="problem" name="problem" rows="4"></textarea>
+                                    <label class="form-label" for="problem"> Tell Your Problem ?</label>
+                                </div>
+
+                            </div>
+                            
+                            <div class="text-center">
+                                <button class='btn btn-primary btn-lg'>Submit</button>
+                            </div>
+
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock body %}
+
+{% block js %}
+<script>
+    function confirmsubmisson() {
+        var x = confirm("Are you sure you want to submit?");
+        if (x)
+            return true;
+        else
+            return false;
+    }
+</script>
+{% endblock js %}
+

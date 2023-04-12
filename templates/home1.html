@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block css %}
+<style>
+body{
+    background-color:aliceblue;
+}
+
+@media only screen and (max-width: 1170px) {
+    .card{
+        text-align:center;
+    }
+}
+</style>
+
+{% endblock css %}
+
+{% block body %}
+<h1 class="text-center my-4" style="font-family: inherit;">{{service}} in {{city}}
+     
+        {% if len == 0 %}
+        (No Result Found)
+        {% else %}
+
+        ({{len}} results)
+        {% endif %}
+    </h1>
+<div class="d-flex my-2 mx-2" style="flex-wrap: wrap;">
+
+    {% for obj in myobj  %}
+    <div class="card mb-3 mx-4 " style="max-width: 540px; background-color: black; color: white;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="/{{obj.profile_img}}" class="img-fluid rounded-start h-100 w-100" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+
+                    <h2 class="card-title">{{obj.name}}</h2>
+                    <h6>{{obj.address}}</h6>
+                    <h6><i class="fas fa-clock"></i> <span class="mx-3">{{obj.timing}}</span></h6>
+                    <h6><i class="fas fa-phone me-3"></i>+91 XXXXXX{{obj.phone|slugify|slice:"6:"}}</h6>
+                    <div style="display: inline-flex;">
+
+                        <h6><span class="badge text-bg-info mx-1">{{obj.service}}</span></h6>
+                        <h6><span class="badge text-bg-info mx-1">Available</span></h6>
+                    </div>
+                    <h6>&#8377;{{obj.fee}} PER HOUR </h6>
+                    <a href="/{{obj.city}}/{{obj.service}}/{{obj.sno}}/checkout" class='btn btn-primary my-1 btn-sm'>Book Appointment</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+   
+
+</div>
+
+{% endblock body %}
