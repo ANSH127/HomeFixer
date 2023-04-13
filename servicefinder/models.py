@@ -68,6 +68,7 @@ class Booking(models.Model):
     sno=models.AutoField(primary_key=True)
     userid=models.ForeignKey(Userdetail,on_delete=models.CASCADE)
     servicer=models.ForeignKey(PartnerService,on_delete=models.CASCADE)
+    mapurl=models.CharField(max_length=200,default='')
     name=models.CharField(max_length=50)
     phone=models.IntegerField()
     address=models.CharField(max_length=100)

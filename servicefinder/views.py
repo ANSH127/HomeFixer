@@ -251,6 +251,7 @@ def checkout(request,slug,slug2,id):
             print(partner_username)
         
             if request.method=='POST':
+                mapurl=request.POST.get('mapurl','')
                 name=request.POST.get('name','')
                 phone=request.POST.get('phone','')
                 address=request.POST.get('address','')
@@ -265,7 +266,7 @@ def checkout(request,slug,slug2,id):
                 
 
 
-                form=Booking(name=name,phone=phone,address=address,date=date,f_time=f_time,a_time=a_time,description=problem,userid=obj2[0],servicer=PartnerService.objects.filter(sno=id)[0])
+                form=Booking(mapurl=mapurl,name=name,phone=phone,address=address,date=date,f_time=f_time,a_time=a_time,description=problem,userid=obj2[0],servicer=PartnerService.objects.filter(sno=id)[0])
                 form.save()
                 form2=PartnerBookings(p_username=partner_username,Booking_details=Booking.objects.filter(sno=form.sno)[0])
                 form2.save()

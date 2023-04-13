@@ -2,11 +2,9 @@
 
 {% block css %}
 <style>
-
     body {
         background-color: aliceblue;
     }
-
 </style>
 
 {% endblock css %}
@@ -19,53 +17,57 @@
             <div class="">
                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                     <div class="card-body p-4 p-md-5">
-                        <h1 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center" style="font-family: inherit;">Contact & Other Details </h1>
-                        <form action="/{{obj.city}}/{{obj.service}}/{{obj.sno}}/checkout"  method="post" onsubmit="return confirmsubmisson();">{% csrf_token %}
-                            
-                            
+                        <h1 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center" style="font-family: inherit;">Contact & Other
+                            Details </h1>
+                        <form action="/{{obj.city}}/{{obj.service}}/{{obj.sno}}/checkout" method="post"
+                            onsubmit="return confirmsubmisson();">{% csrf_token %}
+                            <input type="hidden" id="mapurl" name="mapurl" value="" >
+
+
                             <div class="row">
                                 <div class="col-md-6 mb-4 pb-2">
                                     <div class="form-outline mb-4">
-                                        <input type="text" id="name" name="name" class="form-control form-control-lg"  required/>
+                                        <input type="text" id="name" name="name" class="form-control form-control-lg"
+                                            required />
                                         <label class="form-label" for="name">Your Name</label>
                                     </div>
-                                    
-                                
+
+
 
                                 </div>
                                 <div class="col-md-6 mb-4 pb-2">
                                     <div class="form-outline form-white mb-4 w-100">
-                                        <input type="tel" id="phone" name="phone"
-                                            class="form-control form-control-lg" required />
+                                        <input type="tel" id="phone" name="phone" class="form-control form-control-lg"
+                                            required />
                                         <label class="form-label" for="phone">Your Phone No.</label>
                                     </div>
 
-                                    
+
 
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 mb-4 d-flex align-items-center">
-                                    
+
                                     <div class="form-outline form-white mb-4 w-100">
                                         <input type="text" id="address" name="address"
                                             class="form-control form-control-lg " required />
                                         <label class="form-label" for="address">Your Address</label>
                                     </div>
-                                    
+
 
 
                                 </div>
                                 <div class="col-md-6 mb-4 d-flex align-items-center">
 
                                     <div class="form-outline form-white mb-4 w-100">
-                                        <input type="date" id="date" name="date"
-                                            class="form-control form-control-lg " required />
+                                        <input type="date" id="date" name="date" class="form-control form-control-lg "
+                                            required />
                                         <label class="form-label" for="date">Schedule Date</label>
                                     </div>
 
-                                    
+
 
                                 </div>
 
@@ -100,7 +102,14 @@
                                 </div>
 
                             </div>
-                            
+                            <button class="btn btn-primary btn-sm" type="button" onclick="getLocation()">Grant Location</button>
+                            <div class="row my-4" id="mapbox" style="display: none;">
+                                <iframe id="gmaplink" src="" width="600" height="450" style="border:0;"
+                                    allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+
+
                             <div class="text-center">
                                 <button class='btn btn-primary btn-lg'>Submit</button>
                             </div>
@@ -125,6 +134,22 @@
         else
             return false;
     }
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+
+
+    function showPosition(position) {
+        document.getElementById("mapbox").style.display = "block";
+        
+        document.getElementById("gmaplink").src = "http://maps.google.com/maps?q=" + position.coords.latitude + "," + position.coords.longitude + "&hl=es;z=14&output=embed";
+
+        document.getElementById('mapurl').value="http://maps.google.com/maps?q="+position.coords.latitude+","+position.coords.longitude;
+    }
+
 </script>
 {% endblock js %}
-
