@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title%} Login-JustDialHere {% endblock %}
+
+
+{% block css %}
+<style>
+    body {
+        background-color: aliceblue;
+        /* height: 100%; */
+        /* width: 100vw; */
+        opacity: .8;
+        top: 0;
+        left: 0;
+
+    }
+</style>
+{% endblock css %}
+
+{% block body %}
+
+
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card  text-black" style="border-radius: 1rem; height: 620px;">
+                    <div class="card-body fw-bold p-5">
+                        <div class="mb-md-5 mt-md-4 pb-5">
+                            <form action="/partner/" method="post" enctype='multipart/form-data'>{% csrf_token %}
+
+                                <h2 class=" mb-5 text-uppercase text-center">Partner With Us</h2>
+                                <div class="form-outline mb-4">
+                                    <input type="file" id="pimg" name="pimg"
+                                        class="form-control form-control-lg" required />
+                                    <label class="form-label" for="pimg">Upload Photo</label>
+                                </div>
+
+                                
+                                <div class="form-outline form-white mb-4 w-100">
+                                    <input type="number" id="adhar" name="adhar"
+                                        class="form-control form-control-lg" required />
+                                    <label class="form-label" for="adhar">Enter Your Aadhar No.</label>
+                                </div>
+                                <div class="form-outline form-white mb-4 w-100">
+                                        <textarea name="address" class="w-100 " style="border-radius: 15px; height: 100px; " id="address" cols="30" rows="10"></textarea>
+                                    <label class="form-label" for="address">Enter Your Address</label>
+                                </div>
+
+                                
+                                <div class="text-center">
+
+                                    <button class="btn btn-primary  btn-lg px-5" type="submit">Submit</button>
+                                </div>
+
+                                
+
+                            </form>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+{% endblock body %}

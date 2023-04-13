@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 
 from django.contrib.auth import authenticate,login,logout
-from servicefinder.models import Userdetail,Contact,Partner,Booking
+from servicefinder.models import Userdetail,Contact,Booking,PartnerProfile,PartnerService,PartnerBookings
 # Create your views here.
 
 def home(request):
@@ -14,12 +14,11 @@ def home(request):
         print(e)
         return HttpResponse("Something went wrong")
 
+
 def home1(request,slug,slug2):
     try:
-        print(slug)
-        print(slug2)
-        obj=Partner.objects.filter(city=slug,service=slug2)
-        print(obj)
+        obj=PartnerService.objects.filter(city=slug,service=slug2)
+        # print(obj)
         return render(request,"home1.html",{'myobj':obj,'len':len(obj),'city':slug,'service':slug2})
     except Exception as e:
         print(e)
@@ -143,36 +142,113 @@ def handlelogout(request):
     except Exception as e:
         print(e)
         return HttpResponse("Something went wrong")
-def partner(request):
-    try:
+
+def partnerHome(request):
+    if request.user.is_authenticated:
+        
+        user=request.user
+        obj2=Userdetail.objects.filter(username=user)
         if request.method=='POST':
             profile_img=request.FILES.getlist('pimg')[0]
-
-            name=request.POST.get('name','')
-            email=request.POST.get('email','')
-            phone=request.POST.get('phone','')
             address=request.POST.get('address','')
-            service=request.POST.get('service','')
-            city=request.POST.get('city','')
-            fee=request.POST.get('fee','')
-            time=request.POST.get('time','')
             adhar=request.POST.get('adhar','')
-            form=Partner(profile_img=profile_img,name=name,email=email,phone=phone,aadhar=adhar,service=service,fee=fee,city=city,address=address,timing=time)
-            form.save()
+            print(profile_img,address,adhar)
             
+            obj=PartnerProfile(userid=obj2[0],profile_img=profile_img,address=address,aadhar=adhar)
+            obj.save()
             messages.success(request,"Your Response submitted successfully")
-            return redirect('home')
-            # print(name,email,phone,service,fee,adhar,profile_img,address,city,time)
-        return render(request,"partner.html")
-    except Exception as e:
-        print(e)
-        return HttpResponse("Something went wrong")
+        
+        if PartnerProfile.objects.filter(userid=obj2[0]).exists():
+            return redirect('partnerform')
+        else:
+            return render(request,'phome.html')
+    else:
+        messages.error(request,'Please login first')
+        return redirect('login')
+
+
+def partnerForm(request):
+    if request.user.is_authenticated:
+        
+        user=request.user
+        obj2=Userdetail.objects.filter(username=user)
+        pprofile=PartnerProfile.objects.filter(userid=obj2[0])
+        if pprofile:
+            if request.method=='POST':
+                service=request.POST.get('service','')
+                city=request.POST.get('city','')
+                fee=request.POST.get('fee','')
+                time=request.POST.get('time','')
+                form=PartnerService(profile=pprofile[0],service=service,city=city,fee=fee,timing=time)
+                form.save()
+                messages.success(request,"Your Response submitted successfully")
+                return redirect('home')
+            if PartnerService.objects.filter(profile=pprofile[0],status=True).exists():
+                return redirect('dashboard')
+            elif PartnerService.objects.filter(profile=pprofile[0]).exists():
+                return render(request,'pform.html',{'status':True})
+            else:
+                return render(request,'pform.html',{'status':False}) 
+        else:
+            messages.error(request,'Please fill your profile first')
+            return redirect('partnerhome')
+    else:
+        messages.error(request,'Please login first')
+        return redirect('login')
+
+def partnerUpdateForm(request):
+    if request.user.is_authenticated:
+        user=request.user
+        obj2=Userdetail.objects.filter(username=user)
+        pprofile=PartnerProfile.objects.filter(userid=obj2[0])
+        if pprofile:
+            if PartnerService.objects.filter(profile=pprofile[0],status=True).exists():
+                if request.method=='POST':
+                    service=request.POST.get('service','')
+                    city=request.POST.get('city','')
+                    fee=request.POST.get('fee','')
+                    time=request.POST.get('time','')
+                    PartnerService.objects.filter(profile=pprofile[0],status=True).update(service=service,city=city,fee=fee,timing=time)
+
+                    messages.success(request,"Your Response Updated successfully")
+                    return redirect('dashboard')
+
+                obj=PartnerService.objects.filter(profile=pprofile[0],status=True)
+                print(obj)
+                return render(request,'pupdateform.html',{'obj':obj[0]})
+        else:
+            return HttpResponse('404')
+    else:
+        return HttpResponse('404')
+
+    
+
+def dashboard(request):
+    if request.user.is_authenticated:
+        
+        user=request.user
+        obj2=Userdetail.objects.filter(username=user)
+        pprofile=PartnerProfile.objects.filter(userid=obj2[0])
+        if pprofile:
+            if PartnerService.objects.filter(profile=pprofile[0],status=True).exists():
+                obj=PartnerBookings.objects.filter(p_username=request.user)
+                print(obj)
+
+                return render(request,'dashboard.html',{'obj':obj})
+            else:
+                return HttpResponse('404')
+        else:
+            return HttpResponse('404')
 
 
 def checkout(request,slug,slug2,id):
     try:
 
         if request.user.is_authenticated:
+            
+            obj=PartnerService.objects.filter(sno=id)[0]
+            partner_username=obj.profile.userid.username
+            print(partner_username)
         
             if request.method=='POST':
                 name=request.POST.get('name','')
@@ -189,12 +265,14 @@ def checkout(request,slug,slug2,id):
                 
 
 
-                form=Booking(name=name,phone=phone,address=address,date=date,f_time=f_time,a_time=a_time,description=problem,userid=obj2[0],servicer=Partner.objects.filter(sno=id)[0])
+                form=Booking(name=name,phone=phone,address=address,date=date,f_time=f_time,a_time=a_time,description=problem,userid=obj2[0],servicer=PartnerService.objects.filter(sno=id)[0])
                 form.save()
+                form2=PartnerBookings(p_username=partner_username,Booking_details=Booking.objects.filter(sno=form.sno)[0])
+                form2.save()
                 messages.success(request,"Your Response is saved we'll contact you shortly")
                 return redirect("home")
+
             
-            obj=Partner.objects.filter(sno=id)[0]
             
             return render(request,"checkout.html",{'obj':obj})
         else:
@@ -223,3 +301,38 @@ def booking(request):
     except Exception as e:
         print(e)
         return HttpResponse("Something went wrong")
+    
+
+
+
+def AcceptRequest(request,id):
+    if request.user.is_authenticated:
+        obj=PartnerBookings.objects.filter(sno=id)[0]
+        if(obj.p_username==str(request.user)):
+            PartnerBookings.objects.filter(sno=id).update(confirm=True)
+            # print(obj.Booking_details.sno)
+            Booking.objects.filter(sno=obj.Booking_details.sno).update(status='True')
+            messages.success(request,"Request Accepted")
+
+            
+
+        return redirect('dashboard')
+    else:
+        return HttpResponse('404')
+
+
+def DeclineRequest(request,id):
+    if request.user.is_authenticated:
+        obj=PartnerBookings.objects.filter(sno=id)[0]
+        if(obj.p_username==str(request.user)):
+            PartnerBookings.objects.filter(sno=id).update(cancel=True)
+            # print(obj.Booking_details.sno)
+            Booking.objects.filter(sno=obj.Booking_details.sno).update(status='False')
+            messages.success(request,"Request Declined")
+
+            
+
+        return redirect('dashboard')
+    else:
+        return HttpResponse('404')
+

@@ -15,6 +15,9 @@
 </style>
 {% endblock css %}
 {% block body %}
+{% if status %}
+<h2 class="my-4 text-center fw-bold">Your Response Already Submitted We will Contact you soon.</h2>
+{% else %}
 
 <section class="gradient-custom my-3">
     <div class="container py-5 h-100">
@@ -23,74 +26,9 @@
                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                     <div class="card-body p-4 p-md-5">
                         <h1 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center" style="font-family: inherit;">Partner With Us</h1>
-                        <form action="/partner/" enctype='multipart/form-data' method="post">{% csrf_token %}
+                        <form action="/partner/form/"  method="post">{% csrf_token %}
                             
                             
-                            <div class="row">
-                                <div class="col-md-6 mb-4 pb-2">
-
-                                    
-                                <div class="form-outline mb-4">
-                                    <input type="file" id="pimg" name="pimg"
-                                        class="form-control form-control-lg" required />
-                                    <label class="form-label" for="pimg">Upload Photo</label>
-                                </div>
-
-                                </div>
-                                <div class="col-md-6 mb-4 pb-2">
-
-                                    <div class="form-outline mb-4">
-                                        <input type="text" id="name" name="name" class="form-control form-control-lg"  required/>
-                                        <label class="form-label" for="name">Enter Your Name</label>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6 mb-4 d-flex align-items-center">
-                                    
-                                <div class="form-outline form-white mb-4 w-100">
-                                    <input type="email" id="email" name="email"
-                                        class="form-control form-control-lg" required />
-                                    <label class="form-label" for="email">Enter Your Email</label>
-                                </div>
-
-
-                                </div>
-                                <div class="col-md-6 mb-4 d-flex align-items-center">
-
-                                    <div class="form-outline form-white mb-4 w-100">
-                                        <input type="tel" id="phone" name="phone"
-                                            class="form-control form-control-lg" required />
-                                        <label class="form-label" for="phone">Enter Your Phone No.</label>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-md-6 mb-4 d-flex align-items-center">
-
-                                    <div class="form-outline form-white mb-4 w-100">
-                                        <input type="number" id="adhar" name="adhar"
-                                            class="form-control form-control-lg" required />
-                                        <label class="form-label" for="adhar">Enter Your Aadhar No.</label>
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-6 mb-4 d-flex align-items-center">
-
-                                    <div class="form-outline form-white mb-4 w-100">
-                                        <input type="text" id="address" name="address"
-                                            class="form-control form-control-lg " required />
-                                        <label class="form-label" for="address">Enter Your Address</label>
-                                    </div>
-                                </div>
-                            </div>
                             <!-- <button class="btn btn-danger btn-lg mt-4">Pay Now</button> -->
                             <div class="row">
                                 <div class="col-md-6 mb-4 d-flex align-items-center">
@@ -153,4 +91,6 @@
         </div>
     </div>
 </section>
+{% endif %}
+
 {% endblock body %}

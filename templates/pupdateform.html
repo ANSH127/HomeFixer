@@ -1,0 +1,131 @@
+{% extends 'base2.html' %}
+
+{% block css%}
+<style>
+
+    body {
+        
+        background-color: aliceblue;
+        /* height: 100%; */
+        /* width: 100vw; */
+        opacity: 1;
+        top: 0;
+        left: 0;
+
+    }
+</style>
+{% endblock css %}
+{% block body %}
+<section class="gradient-custom my-3">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                        <h1 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center" style="font-family: inherit;">Update Your Profile</h1>
+                        <form action="/partner/updateform/"  method="post">{% csrf_token %}
+                            
+                            
+                            <!-- <button class="btn btn-danger btn-lg mt-4">Pay Now</button> -->
+                            <div class="row">
+                                <div class="col-md-6 mb-4 d-flex align-items-center">
+                                    <div class="form-outline form-white mb-4 w-100">
+                                        <select name="service" class="select form-control-lg w-100" id="service">
+                                            {% if obj.service == 'Carpenter' %}
+                                            <option value="Electrician">Electrician</option>
+                                            <option value="Carpenter" selected>Carpenter</option>
+                                            <option value="Painter">Painter</option>
+                                            <option value="Plumber">Plumber</option>
+                                            <option value="Welder">Welder</option>
+                                            {% elif obj.service == 'Electrician' %}
+                                            <option value="Electrician" selected>Electrician</option>
+                                            <option value="Carpenter" >Carpenter</option>
+                                            <option value="Painter">Painter</option>
+                                            <option value="Plumber">Plumber</option>
+                                            <option value="Welder">Welder</option>
+                                            {% elif obj.service == 'Painter' %}
+                                            <option value="Electrician">Electrician</option>
+                                            <option value="Carpenter" >Carpenter</option>       
+                                            <option value="Painter" selected>Painter</option>
+                                            <option value="Plumber">Plumber</option>
+
+
+
+
+                                            {% elif obj.service == 'Plumber' %}
+                                            <option value="Electrician">Electrician</option>
+                                            <option value="Carpenter" >Carpenter</option>       
+                                            <option value="Painter" >Painter</option>
+                                            <option value="Plumber" selected>Plumber</option>
+
+
+
+                                            {% else %}
+
+                                            <option value="Electrician">Electrician</option>
+                                            <option value="Carpenter">Carpenter</option>
+                                            <option value="Painter">Painter</option>
+                                            <option value="Plumber">Plumber</option>
+                                            <option value="Welder">Welder</option>
+                                            {% endif %}
+
+                                        </select>
+                                        <label class="form-label" for="service">Service</label>
+    
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-md-6 mb-4 d-flex align-items-center">
+                                    <div class="form-outline form-white mb-4 w-100">
+                                        <select name="city" class="select form-control-lg w-100" id="city">
+                                            {% if obj.city == 'PALIA' %}
+                                            <option value="PALIA" selected>PALIA</option>
+                                            <option value="BHIRA">BHIRA</option>
+                                            {% elif obj.city == 'BHIRA' %}
+                                            <option value="PALIA">PALIA</option>
+                                            <option value="BHIRA" selected>BHIRA</option>
+                                            {% else %}
+                                            {% endif %}
+                                        </select>
+                                        <label class="form-label" for="city">City</label>
+    
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4 d-flex align-items-center">
+                                    <div class="form-outline form-white mb-4 w-100">
+                                        <input type="text" id="time" name="time"
+                                            class="form-control form-control-lg" value="{{obj.timing}}" placeholder="Eg: 9am-5pm" required />
+                                        <label class="form-label" for="time">Timing's</label>
+                                    </div>
+    
+                                    
+                                </div>
+                                <div class="col-md-6 mb-4 d-flex align-items-center">
+                                    
+                                <div class="form-outline form-white mb-4 w-100">
+                                    <input type="number" id="fee" name="fee"
+                                        class="form-control form-control-lg" value="{{obj.fee}}" required />
+                                    <label class="form-label" for="fee">Enter Your Fee per hr.</label>
+                                </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button class='btn btn-primary btn-lg'>Update</button>
+                            </div>
+
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock body %}

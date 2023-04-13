@@ -1,0 +1,40 @@
+{% extends 'base2.html' %} {% block body %}
+<div class="text-center my-4">
+    <a href="/partner/updateform/"><i class="fas fa-user-edit"></i> Edit Your Profile</a>
+</div>
+<div class="container" style="display: flex; flex-wrap: wrap;">
+    {% for item in obj %}
+    <div class="card text-bg-light mb-3 mx-3 my-3" style="max-width: 18rem">
+        <div class="card-header">Request From {{item.Booking_details.name}}</div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Schadule Date: {{item.Booking_details.date}}</li>
+            <li class="list-group-item">Schadule Time: {{item.Booking_details.f_time}} to
+                {{item.Booking_details.a_time}} </li>
+            <li class="list-group-item">Phone: {{item.Booking_details.phone}}</li>
+            <li class="list-group-item">Address: {{item.Booking_details.address}}</li>
+            <li class="list-group-item">Description: {{item.Booking_details.description}}</li>
+            <li class="list-group-item"><a href="">Map </a></li>
+
+        </ul>
+        <div class="card-footer">
+            {% if item.confirm or item.cancel %}
+            {% if item.confirm %}
+            <h5>Accepted the request</h5>
+
+            {% else %}
+            <h5>Decline the request</h5>
+
+
+            {% endif %}
+            {% else %}
+            <a href="/partner/dashboard/accept/{{item.sno}}/" class="btn btn-primary">Accept</a>
+            <a href="/partner/dashboard/decline/{{item.sno}}/" class="btn btn-primary">Decline</a>
+            {% endif %}
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock body %}

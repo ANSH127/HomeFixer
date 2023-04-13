@@ -30,15 +30,15 @@ body{
     <div class="card mb-3 mx-4 " style="max-width: 540px; background-color: black; color: white;">
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="/{{obj.profile_img}}" class="img-fluid rounded-start h-100 w-100" alt="...">
+                <img src="/{{obj.profile.profile_img}}" class="img-fluid rounded-start h-100 w-100" alt="...">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
 
-                    <h2 class="card-title">{{obj.name}}</h2>
-                    <h6>{{obj.address}}</h6>
+                    <h2 class="card-title">{{obj.profile.userid.name}}</h2>
+                    <h6>{{obj.profile.address}}</h6>
                     <h6><i class="fas fa-clock"></i> <span class="mx-3">{{obj.timing}}</span></h6>
-                    <h6><i class="fas fa-phone me-3"></i>+91 XXXXXX{{obj.phone|slugify|slice:"6:"}}</h6>
+                    <h6><i class="fas fa-phone me-3"></i>+91 XXXXXX{{obj.profile.userid.phone|slugify|slice:"6:"}}</h6>
                     <div style="display: inline-flex;">
 
                         <h6><span class="badge text-bg-info mx-1">{{obj.service}}</span></h6>
